@@ -1,0 +1,3 @@
+--recursive ./test/init
+--recursive
+-t 10000
