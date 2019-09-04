@@ -1,4 +1,6 @@
 # @revolugo/ortools
+[![Build Status](https://travis-ci.com/Revolugo/ortools.svg?branch=master)](https://travis-ci.com/Revolugo/ortools)[![MIT Licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 A node.js wrapper for Google OR-Tools.
 
 Current implementation only wraps integer programming necessary classes and methods. It exposes a Promise interface for the `solver.solve()`method.
