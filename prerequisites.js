@@ -107,6 +107,7 @@ const _streamFetchOrtoolsBinaries = async (platform) => {
     await _exec(`mv ${path.resolve(ortoolsDir, 'lib')} ${path.resolve(ORTOOLS_PATH, 'lib')}`)
     await _exec(`mv ${path.resolve(ortoolsDir, 'include')} ${path.resolve(ORTOOLS_PATH, 'include')}`)
     await _exec(`rm -rf ${TEMP_PATH}`)
+    console.log(`OR-Tools installed in ${ ortoolsDir }.`)
   }
   catch(err) {
     console.error(err)
