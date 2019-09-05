@@ -11,7 +11,7 @@ const PREREQS_MAP = {
   'Ubuntu-16.04': 'https://github.com/google/or-tools/releases/download/v7.3/or-tools_ubuntu-16.04_v7.3.7083.tar.gz',
   'CentOS-7': 'https://github.com/google/or-tools/releases/download/v7.3/or-tools_centos-7_v7.3.7083.tar.gz',
   'Debian-9': 'https://github.com/google/or-tools/releases/download/v7.3/or-tools_debian-9_v7.3.7083.tar.gz',
-  'MacOSX': 'https://github.com/google/or-tools/releases/download/v7.3/or-tools_MacOsX-10.14.4_v7.3.7083.tar.gz'
+  'MacOSX': 'https://github.com/google/or-tools/releases/download/v7.3/or-tools_MacOsX-10.14.5_v7.3.7083.tar.gz'
 };
 
 const TEMP_PATH = path.resolve(__dirname, './_tmp')
