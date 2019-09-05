@@ -1,9 +1,18 @@
 {
   "name": "@revolugo/ortools",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Nodejs bindings for or-tools",
   "main": "./index.js",
   "author": "Pierre Veber <pierreveber@revolugo.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Revolugo/ortools.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Revolugo/ortools/issues"
+  },
+  "homepage": "https://github.com/Revolugo/ortools",
   "binary": {
     "module_name": "revolugo_ortools",
     "module_path": "./lib/binding/{configuration}/{napi_build_version}/{node_abi}-{platform}-{arch}/",
@@ -15,9 +24,7 @@
     ]
   },
   "dependencies": {
-    "bluebird": "^3.5.5",
     "cli-progress": "^3.1.0",
-    "lodash": "^4.17.15",
     "node-addon-api": "^1.7.1",
     "node-pre-gyp": "^0.13.0",
     "progress-stream": "^2.0.0",
@@ -25,22 +32,19 @@
     "tar": "^4.4.10"
   },
   "devDependencies": {
-    "assert": "^2.0.0",
-    "aws-sdk": "^2.523.0",
-    "benchmark": "^2.1.4",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
-    "eslint": "^5.0.0",
-    "eslint-config-standard": "^11.0.0-beta.0",
-    "eslint-plugin-html": "^4.0.5",
+    "eslint": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-node": "^5.2.1",
-    "eslint-plugin-promise": "^3.6.0",
-    "eslint-plugin-standard": "^3.0.1",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "faker": "^4.1.0",
     "mocha": "^6.2.0",
-    "nodemon": "^1.19.1",
-    "standard": "^12.0.1"
+    "nodemon": "^1.19.2",
+    "standard": "^14.1.0"
   },
   "scripts": {
     "install": "node prerequisites.js && node-pre-gyp install --fallback-to-build",

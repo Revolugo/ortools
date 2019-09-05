@@ -1,30 +1,38 @@
 language: cpp
 os:
-  - linux
-  - osx
+- linux
+- osx
 env:
   matrix:
-    - NODE_VERSION="10"
+  - NODE_VERSION="10"
   global:
   - secure: zH0BQWJhkmck9iPDfAHN2DdJt+mGLMBBEHtu/V2iDlgTQ1h9l9mXsFp1ESx27tMTSPFBIZdXUjYuzpa5hz2lNKqwIpecFHf5yQz1bHLYiQ2GzVMHP+czmMFPQBtwY0KmphcaP2f5TfM9KnMKgaC2n7IJF+TQtALRJwymzIWsuJDi0i1cFXfC/Xg33RZdOKrYRf/gvJNqpGNGMnboJd/BamD7eh8DjtDMQSUr4zXE9RvAr4sQq+oGxn4ocb+ysa6mE+ToOYkH/RMcAtN+GPm8IeTerZwJYF0WSstoQutQwyF6+kdqs0/JBTiVzmczQys+rCoDfxhRb0vmHVI46Up23BteXSLkE8PSyq/CtFx5hP1jDJDIHDXJf0tlW7ovPEHCbA5ufbdWARehvWTRwlafc0o6UFI6QSiYTxDtdn1fnJiJ6il+VJLhWAoRIEiXdVs7jqJnW/lwZxQ2LLsTgkX2RVuESmdJqtDoqYG7MLX3D8ntIYkEwMnri/rDj19JSyecyh1QuSUE9tTLO8UjZ1CpPTXyVrKFTumWmqto4oHVcDQQZH4ZKxB3CCWoW5/zXXNKuTVZQAaLhvl5KiAmrwGPpPUfMHIdfq5xWm73sgRg5v6f1rvIwP/cspESmPh4ta0wIF8abaQLCBNZxVEEIzNVXQ/pZZENjmJSCwBKlcjIyGA=
   - secure: g2CpHG1fU4FXDpCnIk4c5TA+37bo8FU5jd3SQjcB6Kv0Rj9n+N3/cIGfIz26H6nOt8QaXBbCDUtz5WuCG+yvwP5TJMFjt4e3aLNyWvrOSVg47cXj3DWC6glioN8goS8Ga78g/5iISfV9LvZVGd+a7671zRebK2P0zi9xkN5Ng/xj9SwR19eji8mh37zhNkmoC1S5qPqrklpgkmqBzf8VPD6vNbs/0cJH1tTRKPvbQ2b7RAmEpM62d8bT+hzQJSuZAXpomFcQZ0KX8RX/jwsx/FHHmsRI5sh/ym7phGmGNsf+BNNTIZmtNq/fmVAPZ1sg1c9iZEwQJqnKcoh8khtkxUy+XE66i+TWdCgPwxHP/+8L1WYmAyYRiD6J9ZYVNLXSAJy+CY1ou86tI5XOZFAh3jyhOHASWMQ1uuNlpcOf3DbE9yGugTiAFXUuXcISh9QFaDglHWS6qZ/5RORzYLCGQHOfS0XlNq2kr6xHXLOEqi5KYAcDPkYs1qNV9XQwr4K6bIcYpxA31bB/TWfl3Oaz7V1VoBypOpQaz0LVCBR6I6Tg2dKIbhfeeFm+5/X2q+kXcho3p//9NodSZj073/PrWu5YtxeHd0PzCx/+XGGT9oiXmt/F9FWijWMjBuDiadtstY28yIOm6QNpZ9i2Ncw6F0PyQ4RFDj5XWQvYrk30vPo=
 before_install:
-  - rm -rf ~/.nvm/ && git clone --depth 1 https://github.com/creationix/nvm.git ~/.nvm
-  - source ~/.nvm/nvm.sh
-  - nvm install $NODE_VERSION
-  - nvm use $NODE_VERSION
-  - npm install node-gyp -g
-  - npm install node-pre-gyp -g
-  - npm install aws-sdk -g
+- rm -rf ~/.nvm/ && git clone --depth 1 https://github.com/creationix/nvm.git ~/.nvm
+- source ~/.nvm/nvm.sh
+- nvm install $NODE_VERSION
+- nvm use $NODE_VERSION
+- npm install node-gyp -g
+- npm install node-pre-gyp -g
+- npm install aws-sdk -g
 install:
-  - npm install --build-from-source
-  - npm test
+- npm install --build-from-source
+- npm test
 script:
-  - node-pre-gyp package publish
-  - node-pre-gyp clean
-  - node-gyp clean
-  - INSTALL_RESULT=$(npm install --fallback-to-build=false > /dev/null)$? || true
-  - if [[ $INSTALL_RESULT != 0 ]]; then echo "returned $INSTALL_RESULT";node-pre-gyp unpublish;false; fi
-  - node-pre-gyp clean
+- node-pre-gyp package publish
+- node-pre-gyp clean
+- node-gyp clean
+- INSTALL_RESULT=$(npm install --fallback-to-build=false > /dev/null)$? || true
+- if [[ $INSTALL_RESULT != 0 ]]; then echo "returned $INSTALL_RESULT";node-pre-gyp
+  unpublish;false; fi
+- node-pre-gyp clean
 after_success:
-  - node-pre-gyp info
+- node-pre-gyp info
+deploy:
+  provider: npm
+  email: pierreveber@revolugo.com
+  api_key:
+    secure: qL1N5jdJnWvJSd6CQ6Uzz9lwGKMIn5b4PvqEwNWbO0nN9j6sjQHHzwaMmcgXhpk8T/wEOPIWiwjHfveMxqAlYHmmQZwDvWooZhXA5fRHwWVZ/IvLzb3h0zzHa6S6sMw349YAMlLX+/j9U/R+3iChm5r2PReNblqY6NXsjYz4SG8mS+rJz4o525vnTIoyEx1duHbDhENA/c5UdDIlOmv/ypPDGjvDcvjsYj8FodtvvEmloBTAdCck+V9MvYr5mvC9BIBoxbSRZ+DQDILEBfkY5A5Vy123581adXi9NlXy+nXfG7Gnt0oF6mHLfG8WuJrlPlN2VC7v7cM9VUjLpuFfhYXruGzXIKguqHpB59QRJJ9WpNQtyVAD6LkJKTKtnVv8/gYDO6rSfC9wS0WR7wbRaO1xmuKY5BFjciP1FgWqcgrig6MC8QN3ajWZSCMPd6NAkCk3ra0oHTepd/mFKvQt4n1/TNNX1UOi9BYJlxCggNaqAECznAgAKn0GiqzuAun6LPQate0G28PiioYl4iaOR1785/KgYKU+139sbTrG067rFvSXpo2DCxK3UfpQbG7t0ylxWQEm7PBHaIme/tff7DSIXsYdPqlqycyNbOeIbBsjFvGTUVQ9eR8KHpn6CNoPsAQ2s1fvNfseCZGi5i4m+f8JPcI4SJU7BMIzpjywQtg=
+  on:
+    repo: Revolugo/ortools

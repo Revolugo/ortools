@@ -1,0 +1,16 @@
+*.slo
+*.lo
+*.o
+*.a
+*.la
+*.so
+*.obj
+.DS_Store
+/build*
+/lib
+/dependencies/ortools/lib
+/dependencies/ortools/include
+/_tmp
+
+.travis.yml
+.git

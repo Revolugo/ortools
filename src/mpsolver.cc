@@ -25,7 +25,7 @@ class SolverWorker : public PromiseWorker
     void Resolve(Napi::Promise::Deferred const& deferred) override {
       deferred.Resolve(Napi::Number::New(this->Env(), this->status));
     }
-    void Execute() {
+    void Execute() override {
       this->status = this->solver->Solve();
     }
   private:
