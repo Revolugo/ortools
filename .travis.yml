@@ -19,11 +19,10 @@ before_install:
 install:
   - npm install --build-from-source
   - npm test
-before_script:
-  - node-pre-gyp clean
-  - node-gyp clean
 script:
   - node-pre-gyp package publish
+  - node-pre-gyp clean
+  - node-gyp clean
   - INSTALL_RESULT=$(npm install --fallback-to-build=false > /dev/null)$? || true
   - if [[ $INSTALL_RESULT != 0 ]]; then echo "returned $INSTALL_RESULT";node-pre-gyp unpublish;false; fi
   - node-pre-gyp clean
