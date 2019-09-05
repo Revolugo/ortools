@@ -51,7 +51,14 @@ Napi::Object MPSolverWrap::Init(Napi::Env env, Napi::Object exports)
     InstanceMethod("wall_time", &MPSolverWrap::WallTime),
     InstanceMethod("iterations", &MPSolverWrap::Iterations),
     InstanceMethod("nodes", &MPSolverWrap::Nodes),
-    StaticValue("CBC_MIXED_INTEGER_PROGRAMMING", Napi::Number::New(env, MPSolver::CBC_MIXED_INTEGER_PROGRAMMING))
+    StaticValue("CBC_MIXED_INTEGER_PROGRAMMING", Napi::Number::New(env, MPSolver::CBC_MIXED_INTEGER_PROGRAMMING)),
+    StaticValue("RESULT_OPTIMAL", Napi::Number::New(env, MPSolver::ResultStatus::OPTIMAL)),
+    StaticValue("RESULT_FEASIBLE", Napi::Number::New(env, MPSolver::ResultStatus::FEASIBLE)),
+    StaticValue("RESULT_INFEASIBLE", Napi::Number::New(env, MPSolver::ResultStatus::INFEASIBLE)),
+    StaticValue("RESULT_UNBOUNDED", Napi::Number::New(env, MPSolver::ResultStatus::UNBOUNDED)),
+    StaticValue("RESULT_ABNORMAL", Napi::Number::New(env, MPSolver::ResultStatus::ABNORMAL)),
+    StaticValue("RESULT_NOT_SOLVED", Napi::Number::New(env, MPSolver::ResultStatus::NOT_SOLVED)),
+    StaticValue("RESULT_MODEL_INVALID", Napi::Number::New(env, MPSolver::ResultStatus::MODEL_INVALID))
   });
 
   constructor = Napi::Persistent(func);

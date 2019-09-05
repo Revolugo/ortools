@@ -1,5 +1,5 @@
 # @revolugo/ortools
-[![Build Status](https://travis-ci.com/Revolugo/ortools.svg?branch=master)](https://travis-ci.com/Revolugo/ortools)[![MIT Licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Build Status](https://travis-ci.com/Revolugo/ortools.svg?branch=master)](https://travis-ci.com/Revolugo/ortools) [![Dependency Status](https://img.shields.io/david/Revolugo/ortools.svg)](https://david-dm.org/Revolugo/ortools) [![MIT Licensed](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 A node.js wrapper for Google OR-Tools.
 
@@ -13,40 +13,40 @@ The following OR-Tools C++ Library values, classes and methods are supported.
 
 ### MPSolver
 
-**Supported optimization problem type**: 
+**Supported optimization problem type**:   
 MPSolver::CBC_MIXED_INTEGER_PROGRAMMING
 
-**Methods**:
-MPSolver::Name()
-MPSolver::NumVariables()
-MPSolver::NumConstraints()
-MPSolver::MakeIntVar()
-MPSolver::MakeRowConstraint()
-MPSolver::MakeMutableObjective()
-MPSolver::Solve()
-MPSolver::infinity()
-MPSolver::wall_time()
-MPSolver::iterations()
-MPSolver::nodes()
+**Methods**:  
+MPSolver::Name()  
+MPSolver::NumVariables()  
+MPSolver::NumConstraints()  
+MPSolver::MakeIntVar()  
+MPSolver::MakeRowConstraint()  
+MPSolver::MakeMutableObjective()  
+MPSolver::Solve()  
+MPSolver::infinity()  
+MPSolver::wall_time()  
+MPSolver::iterations()  
+MPSolver::nodes()  
 
 ### MPVariable
 
-**Methods**:
-MPVariable::Name()
-MPVariable::solution_value()
+**Methods**:  
+MPVariable::Name()  
+MPVariable::solution_value()  
 
 ### MPConstraint
 
-**Methods**:
-MPConstraint::SetCoefficient()
+**Methods**:  
+MPConstraint::SetCoefficient()  
 
 ### MPObjective
 
-**Methods**:
-MPObjective::SetCoefficient()
-MPObjective::SetMaximization()
-MPObjective::SetMinimization()
-MPObjective::Value()
+**Methods**:  
+MPObjective::SetCoefficient()  
+MPObjective::SetMaximization()  
+MPObjective::SetMinimization()  
+MPObjective::Value()  
 
 ## Installation
 
@@ -90,15 +90,27 @@ objective.setCoefficient(y, 10)
 // We want the objective to be at a maximum value
 objective.setMaximization()
 
-// Try to solve and find the best solution
+// Try to find the best solution using solve()
+// Returns mapped MPSolver::ResultStatus enum value
+//    ortools.MPSolver.RESULT_OPTIMAL
+//    ortools.MPSolver.RESULT_FEASIBLE
+//    ortools.MPSolver.RESULT_INFEASIBLE
+//    ortools.MPSolver.RESULT_UNBOUNDED
+//    ortools.MPSolver.RESULT_ABNORMAL
+//    ortools.MPSolver.RESULT_NOT_SOLVED
+//    ortools.MPSolver.RESULT_MODEL_INVALID
 const result = await solver.solve()
-console.log('Solution:')
-console.log(`x = ${ x.solution_value() }`)
-console.log(`y = ${ y.solution_value() }`)
-console.log(`objective = ${ objective.value() }`)
+if (result === ortools.MPSolver.RESULT_OPTIMAL) {
+  console.log('Solution:')
+  console.log(`x = ${ x.solution_value() }`)
+  console.log(`y = ${ y.solution_value() }`)
+  console.log(`objective = ${ objective.value() }`)
+}
+else {
+  console.log(`Non optimal result ${ result }!`)
+}
 
 ```
-
 
 
 

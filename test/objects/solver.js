@@ -10,7 +10,13 @@ describe('MPSolver creation', async () => {
 describe('MPSolver methods sanity', async () => {
   it(`check MPSolver static values`, async () => {
     expect(addon.MPSolver.CBC_MIXED_INTEGER_PROGRAMMING).to.be.a('number')
-    //const min = Faker.random.number()
+    expect(addon.MPSolver.RESULT_OPTIMAL).to.be.a('number')
+    expect(addon.MPSolver.RESULT_FEASIBLE).to.be.a('number')
+    expect(addon.MPSolver.RESULT_INFEASIBLE).to.be.a('number')
+    expect(addon.MPSolver.RESULT_UNBOUNDED).to.be.a('number')
+    expect(addon.MPSolver.RESULT_ABNORMAL).to.be.a('number')
+    expect(addon.MPSolver.RESULT_NOT_SOLVED).to.be.a('number')
+    expect(addon.MPSolver.RESULT_MODEL_INVALID).to.be.a('number')
   })
   it(`MPSolver sanity check`, async () => {
     expect(() => { new addon.MPSolver(0, addon.MPSolver.CBC_MIXED_INTEGER_PROGRAMMING) }).to.throw(TypeError)
@@ -85,7 +91,7 @@ describe('MPSolver solve', async () => {
     objective.setCoefficient(y, 10)
     objective.setMaximization()
     const promise = solver.solve()
-    return expect(promise).to.be.fulfilled.then(() => {
+    return expect(promise).to.eventually.equal(addon.MPSolver.RESULT_OPTIMAL).then(() => {
       expect(x.solution_value()).to.equal(3),
       expect(y.solution_value()).to.equal(2),
       expect(objective.value()).to.equal(23)
