@@ -14,6 +14,7 @@ before_install:
   - nvm install $NODE_VERSION
   - nvm use $NODE_VERSION
   - npm install node-gyp -g
+  - npm install node-pre-gyp -g
   - npm install aws-sdk -g
 install:
   - npm install --build-from-source

@@ -33,9 +33,11 @@ const _streamFetchOrtoolsBinaries = async (platform) => {
       fs.mkdirSync(TEMP_PATH, { recursive: true })
       const prog = progress({ time: 100 })
       const bar = new SingleBar()
+      let headers
       const stream = request.get(PREREQS_MAP[platform])
         .on('response', (response) => {
-          const length = parseInt(response.headers['content-length'])
+          headers = response.headers
+          const length = parseInt(headers['content-length'])
           prog.setLength(length)
           bar.start(length, 0)
         })
@@ -48,7 +50,7 @@ const _streamFetchOrtoolsBinaries = async (platform) => {
         bar.stop()
         const files = fs.readdirSync(TEMP_PATH)
         if (files.length === 0) {
-          return reject(new Error('Empty download directory, fetching prerequisites failed.'))
+          return reject(new Error(`Empty download directory, fetching prerequisites failed - response headers:\n${headers}`))
         }
         if (files.length > 1) {
           console.warn(`Multiple files found in download directory - returning first found: ${files[0]}`)
@@ -96,10 +98,12 @@ const _streamFetchOrtoolsBinaries = async (platform) => {
     platform += `-${version.stdout.trim()}`
   }
   finally {
+    console.log(`Prerequisites platform: ${platform}`)
     if (!PREREQS_MAP[platform]) {
      console.log(`Unsupported platform, cannot install prerequisites.`)
      process.exit(1)
     }
+    console.log(`Prerequisites download URL: ${PREREQS_MAP[platform]}`)
   }
   
   try {
