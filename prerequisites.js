@@ -50,7 +50,7 @@ const _streamFetchOrtoolsBinaries = async (platform) => {
         bar.stop()
         const files = fs.readdirSync(TEMP_PATH)
         if (files.length === 0) {
-          return reject(new Error(`Empty download directory, fetching prerequisites failed - response headers:\n${headers}`))
+          return reject(new Error(`Empty download directory, fetching prerequisites failed - response headers:\n${JSON.stringify(headers, null, 2)}`))
         }
         if (files.length > 1) {
           console.warn(`Multiple files found in download directory - returning first found: ${files[0]}`)
