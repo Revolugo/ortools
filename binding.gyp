@@ -39,7 +39,7 @@
           ],
           'link_settings': {
             'libraries': [
-              '-Wl,-rpath @loader_path/../../../../../dependencies/ortools/lib'
+              '-Wl,-rpath -Wl,@loader_path/../../../../../dependencies/ortools/lib'
             ]
           }
         }],

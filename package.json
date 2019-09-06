@@ -1,6 +1,6 @@
 {
   "name": "@revolugo/ortools",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Nodejs bindings for or-tools",
   "publishConfig": {
     "access": "public"
