@@ -36,7 +36,19 @@
           },
           'cflags_cc': [
             '-framework CoreFoundation'
-          ]
+          ],
+          'link_settings': {
+            'libraries': [
+              '-Wl,-rpath @loader_path/../../../../../dependencies/ortools/lib'
+            ]
+          }
+        }],
+        ['OS=="linux"', {
+          'link_settings': {
+            'libraries': [
+              '-Wl,-rpath \'-Wl,$$ORIGIN/../../../../../dependencies/ortools/lib\''
+            ]
+          }
         }]
       ],
       'defines': [
@@ -49,8 +61,6 @@
           '<(module_root_dir)/dependencies/ortools/lib'
         ],
         'libraries': [
-          '-Wl,-rpath,<(module_root_dir)/dependencies/ortools/lib',
-          '-Wl,-rpath,<(module_root_dir)',
           '-lz',
           '-labsl_bad_any_cast_impl',
           '-labsl_bad_optional_access',

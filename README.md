@@ -99,16 +99,19 @@ objective.setMaximization()
 //    ortools.MPSolver.RESULT_ABNORMAL
 //    ortools.MPSolver.RESULT_NOT_SOLVED
 //    ortools.MPSolver.RESULT_MODEL_INVALID
-const result = await solver.solve()
-if (result === ortools.MPSolver.RESULT_OPTIMAL) {
-  console.log('Solution:')
-  console.log(`x = ${ x.solution_value() }`)
-  console.log(`y = ${ y.solution_value() }`)
-  console.log(`objective = ${ objective.value() }`)
-}
-else {
-  console.log(`Non optimal result ${ result }!`)
-}
+;(async () => {
+  const result = await solver.solve()
+  if (result === ortools.MPSolver.RESULT_OPTIMAL) {
+    console.log('Solution:')
+    console.log(`x = ${ x.solution_value() }`)
+    console.log(`y = ${ y.solution_value() }`)
+    console.log(`objective = ${ objective.value() }`)
+  }
+  else {
+    console.log(`Non optimal result ${ result }!`)
+  }
+})();
+
 
 ```
 
