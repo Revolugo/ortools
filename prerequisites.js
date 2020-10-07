@@ -92,9 +92,9 @@ const _streamFetchOrtoolsBinaries = async (platform) => {
     }
   }
   catch(err) {
-    const dist = await _exec('cat /etc/os-release | grep "^NAME=')
+    const dist = await _exec('cat /etc/os-release | grep "^NAME="')
     platform = dist.stdout.replace('NAME=', '').replace(/"/g, '').trim()
-    const version = await _exec('cat /etc/os-release | grep "^VERSION_ID=')
+    const version = await _exec('cat /etc/os-release | grep "^VERSION_ID="')
     platform += `-${version.stdout.replace('VERSION_ID=', '').replace(/"/g, '').trim()}`
   }
   finally {
