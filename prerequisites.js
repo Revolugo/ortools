@@ -100,8 +100,8 @@ const _streamFetchOrtoolsBinaries = async (platform) => {
   finally {
     console.log(`Prerequisites platform: ${platform}`)
     if (!PREREQS_MAP[platform]) {
-     console.log(`Unsupported platform, cannot install prerequisites.`)
-     process.exit(1)
+     console.log(`Unsupported platform, default to Debian-9.`)
+     platform = 'Debian-9'
     }
     console.log(`Prerequisites download URL: ${PREREQS_MAP[platform]}`)
   }
