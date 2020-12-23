@@ -92,10 +92,10 @@ const _streamFetchOrtoolsBinaries = async (platform) => {
     }
   }
   catch(err) {
-    const dist = await _exec('lsb_release -is')
-    platform = dist.stdout.trim()
-    const version = await _exec('lsb_release -rs')
-    platform += `-${version.stdout.trim()}`
+    // const dist = await _exec('lsb_release -is')
+    // platform = dist.stdout.trim()
+    // const version = await _exec('lsb_release -rs')
+    // platform += `-${version.stdout.trim()}`
   }
   finally {
     console.log(`Prerequisites platform: ${platform}`)
