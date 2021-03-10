@@ -9,8 +9,8 @@ const SingleBar = require('cli-progress').SingleBar;
 const PREREQS_MAP = {
   'Ubuntu-18.04': 'https://github.com/google/or-tools/releases/download/v7.3/or-tools_ubuntu-18.04_v7.3.7083.tar.gz',
   'Ubuntu-16.04': 'https://github.com/google/or-tools/releases/download/v7.3/or-tools_ubuntu-16.04_v7.3.7083.tar.gz',
-  'CentOS-7': 'https://github.com/google/or-tools/releases/download/v7.3/or-tools_centos-7_v7.3.7083.tar.gz',
-  'Debian-9': 'https://github.com/google/or-tools/releases/download/v7.3/or-tools_debian-9_v7.3.7083.tar.gz',
+  'CentOS Linux-7': 'https://github.com/google/or-tools/releases/download/v7.3/or-tools_centos-7_v7.3.7083.tar.gz',
+  'Debian GNU/Linux-9': 'https://github.com/google/or-tools/releases/download/v7.3/or-tools_debian-9_v7.3.7083.tar.gz',
   'MacOSX': 'https://github.com/google/or-tools/releases/download/v7.3/or-tools_MacOsX-10.14.5_v7.3.7083.tar.gz'
 };
 
@@ -92,10 +92,10 @@ const _streamFetchOrtoolsBinaries = async (platform) => {
     }
   }
   catch(err) {
-    const dist = await _exec('lsb_release -is')
-    platform = dist.stdout.trim()
-    const version = await _exec('lsb_release -rs')
-    platform += `-${version.stdout.trim()}`
+    const dist = await _exec('cat /etc/os-release | grep "^NAME="')
+    platform = dist.stdout.replace('NAME=', '').replace(/"/g, '').trim()
+    const version = await _exec('cat /etc/os-release | grep "^VERSION_ID="')
+    platform += `-${version.stdout.replace('VERSION_ID=', '').replace(/"/g, '').trim()}`
   }
   finally {
     console.log(`Prerequisites platform: ${platform}`)
