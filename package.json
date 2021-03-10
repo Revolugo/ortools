@@ -50,7 +50,6 @@
     "standard": "^14.1.0"
   },
   "scripts": {
-    "install": "node prerequisites.js && node-pre-gyp install --fallback-to-build",
     "test": "NODE_ENV=test mocha test"
   },
   "standard": {
